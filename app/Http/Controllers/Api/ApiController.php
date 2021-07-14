@@ -76,6 +76,25 @@ class ApiController extends Controller
     //update api - PUT
     public function updateEmployee(Request $request, $id)
     {
+        if (Employee::where('id', $id)->exists()) {
+            $employee = Employee::find($id);
+
+            $employee->name = !empty($request->name) ? $request->name : $employee->name;
+            $employee->email = !empty($request->email) ? $request->email : $employee->email;
+            $employee->phone_no = !empty($request->phone_no) ? $request->phone_no : $employee->phone_no;
+            $employee->gender = !empty($request->gender) ? $request->gender : $employee->gender;
+            $employee->age = !empty($request->age) ? $request->age : $employee->age;
+            $employee->save();
+            return response()->json([
+                'status' => 1,
+                'message' => 'Employee Updated Successfully!'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Employee not found!'
+            ], 404);
+        }
     }
 
     //delete api - DELETE
