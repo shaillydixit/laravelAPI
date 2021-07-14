@@ -12,4 +12,6 @@ class Employee extends Model
     protected $table = "employees";
 
     protected $fillable = ['name', 'email', 'phone_no', 'gender', 'age'];
+
+    public $timestamps = false;
 }

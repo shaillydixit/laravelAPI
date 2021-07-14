@@ -19,12 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('list-employees', [ApiController::class, 'listEmolpyees']);
+Route::get('list-employees', [ApiController::class, 'listEmployees']);
 
-Route::get('sinlge-employee/{id}', [ApiController::class, 'getSingleEmolpyee']);
+Route::get('sinlge-employee/{id}', [ApiController::class, 'getSingleEmployee']);
 
-Route::get('add-employee', [ApiController::class, 'createEmolpyee']);
+Route::post('add-employee', [ApiController::class, 'createEmployee']);
 
-Route::put('update-employee/{id}', [ApiController::class, 'updateEmolpyee']);
+Route::put('update-employee/{id}', [ApiController::class, 'updateEmployee']);
 
-Route::delete('delete-employee/{id}', [ApiController::class, 'deleteEmolpyee']);
+Route::delete('delete-employee/{id}', [ApiController::class, 'deleteEmployee']);
