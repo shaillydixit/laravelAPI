@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('list-employees', [ApiController::class, 'listEmployees']);
 
-Route::get('sinlge-employee/{id}', [ApiController::class, 'getSingleEmployee']);
+Route::get('single-employee/{id}', [ApiController::class, 'getSingleEmployee']);
 
 Route::post('add-employee', [ApiController::class, 'createEmployee']);
 

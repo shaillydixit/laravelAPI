@@ -57,6 +57,20 @@ class ApiController extends Controller
     //single detail api - GET
     public function getSingleEmployee($id)
     {
+        if (Employee::where('id', $id)->exists()) {
+            $employee_detail = Employee::where('id', $id)->first();
+
+            return response()->json([
+                'status' => 1,
+                'message' => 'Employee found',
+                'data' => $employee_detail,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Employee not found!'
+            ], 404);
+        }
     }
 
     //update api - PUT
