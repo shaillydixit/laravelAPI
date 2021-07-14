@@ -9,6 +9,7 @@ use App\Models\Employee;
 class ApiController extends Controller
 {
     //create api - POST
+    //http://127.0.0.1:8000/api/add-employee
     public function createEmployee(Request $request)
     {
         //validation
@@ -42,6 +43,7 @@ class ApiController extends Controller
     }
 
     //list api - GET
+    //http://127.0.0.1:8000/api/list-employees
     public function listEmployees()
     {
         $employees = Employee::get();
@@ -55,6 +57,7 @@ class ApiController extends Controller
     }
 
     //single detail api - GET
+    //http://127.0.0.1:8000/api/single-employee/2
     public function getSingleEmployee($id)
     {
         if (Employee::where('id', $id)->exists()) {
@@ -74,6 +77,7 @@ class ApiController extends Controller
     }
 
     //update api - PUT
+    //http://127.0.0.1:8000/api/update-employee/2
     public function updateEmployee(Request $request, $id)
     {
         if (Employee::where('id', $id)->exists()) {
@@ -98,7 +102,21 @@ class ApiController extends Controller
     }
 
     //delete api - DELETE
+    //http://127.0.0.1:8000/api/delete-employee/1
     public function deleteEmployee($id)
     {
+        if (Employee::where('id', $id)->exists()) {
+            $employee = Employee::find($id);
+            $employee->delete();
+            return response()->json([
+                'status' => 1,
+                'message' => 'Employee Deleted Successfully!',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Employee not found!'
+            ], 404);
+        }
     }
 }
